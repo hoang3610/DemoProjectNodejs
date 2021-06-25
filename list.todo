@@ -1,0 +1,13 @@
+☐ create a api /:userID/decks
+✔ --- getuserdeck @done (6/24/2021, 5:13:45 PM)
+✔ --- newuserdeck @done (6/24/2021, 4:57:37 PM)
+
+☐ validater for parameters
+    ✔ --- install package joi @done (6/24/2021, 10:04:52 PM)
+        ✔ --- npm install @hapi/joi @done (6/24/2021, 10:04:55 PM)
+    ☐ ---
+    ☐ ---
+    ✔ create folder helpers/routerHelpers.js check value params @done (6/24/2021, 10:05:06 PM)
+
+
+    
