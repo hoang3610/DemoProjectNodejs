@@ -9,5 +9,17 @@
     ☐ ---
     ✔ create folder helpers/routerHelpers.js check value params @done (6/24/2021, 10:05:06 PM)
 
+jsonwebtoken
+    ✔ install jsonwebtoken @done (6/27/2021, 4:23:29 PM)
+    ✔ create function encodedToken @done (6/27/2021, 4:59:00 PM)
+    ☐ set token vao Header
+        ✔ -- res.setHeader(token) @done (6/27/2021, 4:59:57 PM)
+
+passport
+    ☐ install passport and passport-jwt
+
+
+
+
 
     

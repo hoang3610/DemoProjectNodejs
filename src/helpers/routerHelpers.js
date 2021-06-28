@@ -31,8 +31,6 @@ const validateBody = (schema) => {
         } else {
             if (!req.value) req.value = {}
             if (!req.value['params']) req.value.params = {}
-
-            console.log(validatorResult)
             req.value.body = validatorResult.value
             next()
         }
@@ -40,6 +38,18 @@ const validateBody = (schema) => {
 }
 
 const schemas = {
+    authSignUpSchema: Joi.object().keys({
+        firstName: Joi.string().min(2).required(),
+        lastName: Joi.string().min(2).required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().min(6).required()
+    }),
+
+    authSignInSchema: Joi.object().keys({
+        email: Joi.string().email().required(),
+        password: Joi.string().min(6).required()
+    }),
+
     idSchema: Joi.object().keys({
         param: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
     }),

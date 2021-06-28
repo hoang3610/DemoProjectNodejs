@@ -1,6 +1,18 @@
 const UserModel = require("../models/user.model");
 const DeckModel = require("../models/deck.model");
 
+const { JWT_SECRET } = require('../configs/index')
+const JWT = require('jsonwebtoken')
+
+const encodedToken = (userId) => {
+  return JWT.sign({
+    iss: 'Van Hoang',
+    sub: userId,
+    iat: new Date().getTime(),
+    exp: new Date().setDate(new Date().getDate() + 3),
+  }, JWT_SECRET)
+}
+
 const getAllUsers = async () => {
   return await UserModel.find({});
 };
@@ -67,6 +79,26 @@ const addNewDeck = async (req) => {
   return await newDeck
 };
 
+const signup = async (req, res) => {
+  // req.value.params is a Object, so use {}
+  const {firstName, lastName, email, password} = req.value.body
+
+  const foundEmail = await UserModel.findOne({email})
+  if(foundEmail) return res.status(403).json({error: {message: "Email is already in use."}})
+
+  // create a User
+  const newUser = new UserModel({firstName, lastName, email, password})
+  newUser.save()
+
+  // encode Token
+  return await encodedToken(newUser._id);
+};
+
+const signin = async (req, res) => {
+  // encode Token
+  return await encodedToken(req.user._id);
+};
+
 module.exports = {
   getAllUsers,
   addNewUser,
@@ -74,5 +106,7 @@ module.exports = {
   replaceUserID,
   updateUserID,
   addNewDeck,
-  getUserDeck
+  getUserDeck,
+  signup, 
+  signin
 }

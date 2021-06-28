@@ -1,3 +1,6 @@
+import { set } from "mongoose";
+import { token } from "morgan";
+
 const UserService = require("../services/users.service.js");
 const UserController = {};
 
@@ -48,6 +51,27 @@ UserController.newUserDeck = async (req, res, next) => {
   // async/await way
   const newDeck = await UserService.addNewDeck(req);
   return res.status(201).json({deck: newDeck})
+};
+
+UserController.signup = async (req, res, next) => {
+  // async/await way
+  const token = await UserService.signup(req, res)
+  console.log(token)
+  res.setHeader('Authorization', token)
+  return res.status(201).json({success: true})
+};
+
+UserController.signin = async (req, res, next) => {
+  // async/await way
+  console.log("dang nhap thanh cong")
+  //Assign a token
+  const token = await UserService.signin(req, res)
+  res.setHeader('Authorization', token)
+  return res.status(201).json({success: true})
+};
+
+UserController.secret = async (req, res, next) => {
+  return res.status(200).json({resource: true})  
 };
 
 export default UserController;
